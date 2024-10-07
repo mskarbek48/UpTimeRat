@@ -1,0 +1,42 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <div class="container mx-auto">
+        <div class="mb-3">
+            <h2 class="text-white text-2xl font-bold block w-full"><span class="text-slate-400">{{ page.name }}</span> - Settings</h2>
+        </div>
+
+        <form id="form">
+        <div class="flex gap-5">
+            <div class="p-4 bg-slate-800 rounded-lg w-full ">
+                <div class="flex flex-row mb-4 w-full gap-2">
+                    <div>
+                        <label for="shortname" class="text-white text-sm text-sm mb-2">Name</label>
+                        <input type="text" id="shortname" maxlength="15" name="shortname" placeholder="google"
+                               class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-800 rounded-lg w-full">
+                <label for="monitors" class="text-white text-sm text-sm mb-2">Monitors</label>
+                <select name="monitors" multiple id="monitors" class="outline-none bg-slate-700 text-sm text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+
+                    {% for monitor in monitors %}
+                        <option value="{{ monitor.id }}"
+                        {% for pm in page.monitor %}
+                            {% if pm.id == monitor.id %}
+                                selected
+                            {% endif %}
+                        {% endfor %}
+                        >{{ monitor.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <input type="hidden" name="token" id="token" value="{{ csrf_token('statuspage-token') }}">
+        <button type="submit" id="submit-button" class="bg-indigo-500 text-sm mt-3 font-semibold hover:bg-indigo-600 text-white rounded-lg pt-1 pb-1 ps-3 pe-3">Save</button>
+
+        </form>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StatusPageController!{% endblock %}
+
+{% block body %}
+
+<div class="container mx-auto">
+
+    <div class="flex flex-row justify-space pt-5 pb-5">
+        <div class="flex flex-row items-center justify-center gap-5">
+            <img src="/assets/img/logo-rat.png" alt="logo" class="w-16 mx-auto">
+            <h1 class="text-2xl text-white font-bold">{{ statusPage.name }}</h1>
+        </div>
+    </div>
+
+    <div class="p-10 bg-slate-800 rounded-lg mb-8">
+        {% if issues %}
+            <div class="flex flex-row items-center text-white font-semibold text-xl gap-5">
+                <span class="pulse-yellow h-3 w-3 block">
+                </span>
+                Some services are experiencing issues.
+            </div>
+
+        {% else %}
+            <div class="flex flex-row items-center text-white font-semibold text-xl gap-5">
+                <span class="pulse-green h-3 w-3 block">
+                </span>
+                All services are operational.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <h2 class="text-white text-xl font-bold mb-2">Uptime history</h2>
+
+
+    <div class="p-10 bg-slate-800 rounded-lg mb-5">
+        <div class="flex flex-col justify-center items-center">
+            {% for monitor in statusPage.getmonitor %}
+                <div class="pb-5 pt-5 w-full
+                {% if not loop.last %}
+                border-b
+                border-1 border-slate-700
+
+                {% endif %}
+                ">
+                    <div class="flex flex-row justify-between items-center">
+                        <div>
+                            <h6 class="text-lg text-slate-300 font-semibold">
+
+                                {{ monitor.name }}
+                                {{ monitorUptime(monitor)|raw }}
+                            </h6>
+                        </div>
+                        <div class="flex flex-row">
+                            {{ monitorUptimeTable(monitor)|raw }}
+                            <div class="text-right mb-2 min-w-36">
+                                {{ monitorStatus(monitor)|raw }}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

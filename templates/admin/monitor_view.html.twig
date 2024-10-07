@@ -1,0 +1,157 @@
+{% extends '/admin/base.html.twig' %}
+
+{% block content %}
+
+    <div class="container mx-auto flex items-center justify-center">
+        <div class="w-1/2">
+            <div class="rounded-lg bg-slate-800 p-5">
+                <form id="form">
+                    <div class="flex flex-row gap-2">
+                        <div class="flex flex-col mb-4 w-full">
+                            <div class="">
+                                <label for="name" class="text-white text-sm mb-2">Name</label>
+                                <input type="text" id="name" maxlength="255" placeholder="Google Website" value="{{ monitor.name }}"
+                                       class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                            </div>
+                        </div>
+                        <div class="flex flex-col mb-4 w-full">
+                            <div>
+                                <label for="shortname" class="text-white text-sm text-sm mb-2">Short name</label>
+                                <input type="text" id="shortname" maxlength="15" name="shortname" placeholder="google" value="{{ monitor.shortname }}"
+                                       class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col mb-4">
+                        <label for="type" class="text-white text-sm text-sm mb-1">Type</label>
+                        <select name="type" id="type" class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                            <option value="website" {% if monitor.type=='website' %}selected{% endif %}>Website (HTTP)</option>
+                            <option value="ping" {% if monitor.type=='ping' %}selected{% endif %}>Ping</option>
+                            <option value="port" {% if monitor.type=='port' %}selected{% endif %}>Port</option>
+
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-4" id="url_wrapper">
+                        <label for="url" class="text-white text-sm">URL</label>
+                        <input type="text" id="url" name="url" value="{{ monitor.url }}"
+                               class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                    </div>
+                    <div class="flex flex-col mb-4 hidden" id="ip_wrapper">
+                        <label for="name" class="text-white text-sm ">IP Address</label>
+                        <div class="flex flex-row">
+                            <input type="text" id="ip" value="{{ monitor.ipaddress }}"
+                                   class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 w-full block rounded-l-lg border border-slate-600 border-r-0 text-right w-36">
+                            <span class="block border border-s-0 border-e-0 bg-slate-700 border-slate-600 text-white font-bold text-xl pb-2 pt-2 ps-3 pe-3" id="ip_separator">:</span>
+                            <input  value="{{ monitor.port }}"
+                                    type="text" id="port" class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-r-lg border border-slate-600 border-l-0 w-16" name="port">
+                        </div>
+
+                    </div>
+                    <div class="flex flex-row gap-2">
+                        <div class="flex flex-col mb-4 w-full">
+                            <div>
+                                <label for="name" class="text-white text-sm ">Interval (Minutes)</label>
+                                <input type="number" id="interval" name="interval" value="{{ monitor.intervaltime / 60 }}"
+                                       class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                            </div>
+
+                        </div>
+                        <div class="flex flex-col mb-4 w-full">
+                            <div>
+                                <label for="name" class="text-white text-sm">Tries</label>
+                                <input type="text" id="tries" name="tries" value="{{ monitor.tries }}"
+                                       class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="edit_id" value="{{ monitor.id }}">
+                    <input type="hidden" value="{{ csrf_token('add-monitor') }}" id="token" name="token">
+
+                    <button type="submit" id="submit-button" class="bg-indigo-500 text-sm font-semibold hover:bg-indigo-600 text-white rounded-lg pt-1 pb-1 ps-3 pe-3">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#type").on("change", function(e){
+
+            let value = $(this).val();
+            if(value != 'website')
+            {
+                $("#ip_wrapper").removeClass("hidden");
+                $("#url_wrapper").addClass("hidden");
+                if(value == 'ping')
+                {
+                    $("#port").addClass("hidden");
+                    $("#ip_separator").addClass("hidden");
+                    $("#ip").removeClass("border-r-0");
+                    $("#ip").addClass("rounded-r-lg");
+                } else {
+                    $("#port").removeClass("hidden");
+                    $("#ip_separator").removeClass("hidden");
+                    $("#ip").removeClass("rounded-r-lg");
+                    $("#ip").addClass("border-r-0");
+
+                }
+            } else {
+                $("#url_wrapper").removeClass("hidden");
+                $("#ip_wrapper").addClass("hidden");
+            }
+        });
+
+        $("#form").on("submit", function(e){
+            e.preventDefault();
+
+            $("#submit-button").attr("disabled", "disabled");
+
+            let data = {
+                name: $("#name").val(),
+                shortname: $("#shortname").val(),
+                type: $("#type").val(),
+                url: $("#url").val(),
+                ip: $("#ip").val(),
+                port: $("#port").val(),
+                interval: $("#interval").val(),
+                tries: $("#tries").val(),
+                token: $("#token").val(),
+                edit_id: $("#edit_id").val()
+            };
+
+            $.ajax({
+                url: "{{ path('app_monitor_api_add') }}",
+                method: "PUT",
+                data: JSON.stringify(data),
+                success: function(response){
+
+                    console.log(response);
+
+                    if(response.success)
+                    {
+                        toastr.success("Monitor added/updated successfully");
+                        setTimeout(function(){
+                            window.location.href = "{{ path('app_admin_monitor_list') }}";
+                        }, 1000);
+                    } else {
+                        $("#submit-button").removeAttr("disabled");
+                        response.errors.forEach(function(v){
+                            toastr.error(v);
+                        })
+                    }
+
+                }
+
+            });
+
+        });
+
+        $("#type").trigger("change");
+
+
+
+    </script>
+
+{% endblock %}

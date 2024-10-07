@@ -1,0 +1,18 @@
+{% extends 'admin/base.html.twig' %}
+{% block content %}
+
+    <div class="container mx-auto mt-5">
+        <div class="grid grid-cols-6">
+            <div class="bg-slate-700 p-5 rounded-lg">
+
+                <h2 class="text-white text-4xl font-bold h-32">
+                    <div class="flex justify-center items-center h-full">
+                        {{ monitors|length }}
+                    </div>
+                </h2>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

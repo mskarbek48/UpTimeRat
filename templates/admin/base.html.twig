@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard - UpTimeRat{% endblock %}
+
+{% block body %}
+
+    <div class="bg-slate-800 mb-10">
+        <div class="container mx-auto pt-3 pb-3">
+            <div class="flex flex-row gap-5 justify-between">
+                <div class="flex flex-row gap-3 items-center justify-center">
+                    <img src="/assets/img/logo-rat.png" style="width: 48px; height: auto;">
+                    <div class="m-0">
+                        <h2 class="text-white text-xl font-bold m-0 p-0">UpTimeRat</h2>
+                        <small class="text-sm text-slate-400">Simple monitoring solution.</small>
+                    </div>
+                </div>
+                <ul class="flex flex-row gap-8 list-none justify-center items-center">
+                    <li>
+                        <a href="/admin/monitor" class="text-white hover:text-sky-400">Monitors</a>
+                    </li>
+                    <li>
+                        <a href="/admin/statuspage" class="text-white hover:text-sky-400">Status Pages (TODO)</a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-white hover:text-sky-400">Settings (TODO)</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+
+
+
+{% endblock %}
