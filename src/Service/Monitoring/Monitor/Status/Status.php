@@ -11,7 +11,9 @@
 	 *
 	 **/
 	
-	namespace App\Service\Monitor;
+	namespace App\Service\Monitoring\Monitor\Status;
+	
+	use App\Service\Monitoring\Monitor\MonitorInterface;
 	
 	class Status
 	{

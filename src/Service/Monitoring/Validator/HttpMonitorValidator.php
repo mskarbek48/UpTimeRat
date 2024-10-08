@@ -11,7 +11,7 @@
 	 *
 	 **/
 	
-	namespace App\Service\Monitor\Validator;
+	namespace App\Service\Monitoring\Validator;
 	
 	class HttpMonitorValidator extends AbstractMonitorValidator implements MonitorValidatorInterface
 	{

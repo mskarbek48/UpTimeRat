@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Service\Monitor\MonitorManager;
+use App\Service\Monitoring\StatusCheckerManager;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,9 +18,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CrontabCommand extends Command
 {
 	
-	private MonitorManager $monitorManager;
+	private StatusCheckerManager $monitorManager;
 	
-    public function __construct(MonitorManager $monitorManager)
+    public function __construct(StatusCheckerManager $monitorManager)
     {
 		$this->monitorManager = $monitorManager;
         parent::__construct();

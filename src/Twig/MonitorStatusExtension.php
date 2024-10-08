@@ -14,7 +14,7 @@
 	namespace App\Twig;
 	
 	use App\Entity\Monitor;
-	use App\Service\Monitor\Presenter\MonitorPresenter;
+	use App\Service\Monitoring\Presenter\MonitorPresenter;
 	
 	class MonitorStatusExtension extends \Twig\Extension\AbstractExtension
 	{

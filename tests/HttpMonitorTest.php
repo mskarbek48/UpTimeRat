@@ -13,7 +13,7 @@
 	
 	namespace App\Tests;
 	
-	use App\Service\Monitor\HttpMonitor;
+	use App\Service\Monitoring\Monitor\HttpMonitor;
 	use PHPUnit\Framework\TestCase;
 	
 	class HttpMonitorTest extends TestCase

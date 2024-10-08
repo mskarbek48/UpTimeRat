@@ -11,9 +11,9 @@
 	 *
 	 **/
 	
-	namespace App\Service\Monitor\Validator;
+	namespace App\Service\Monitoring\Validator;
 	
-	class PortMonitorValidator extends AbstractMonitorValidator implements MonitorValidatorInterface
+	class PingMonitorValidator extends AbstractMonitorValidator implements MonitorValidatorInterface
 	{
 		public function validate(array $data): array
 		{
@@ -21,10 +21,6 @@
 			
 			if(empty($data['ip']) || !filter_var($data['ip'], FILTER_VALIDATE_IP)) {
 				$errors[] = 'Invalid IP address';
-			}
-			
-			if(empty($data['port']) || !filter_var($data['port'], FILTER_VALIDATE_INT)) {
-				$errors[] = 'Invalid port number';
 			}
 			
 			return $errors;

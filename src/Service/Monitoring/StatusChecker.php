@@ -11,11 +11,15 @@
 	 *
 	 **/
 	
-	namespace App\Service\Monitor;
+	namespace App\Service\Monitoring;
 	
 	use App\Entity\Monitor;
-	use App\Service\Monitor\Status\StatusInterface;
-
+	use App\Service\Monitoring\Monitor\HttpMonitor;
+	use App\Service\Monitoring\Monitor\MonitorInterface;
+	use App\Service\Monitoring\Monitor\PortMonitor;
+	use App\Service\Monitoring\Monitor\Status\Status;
+	use App\Service\Monitoring\Status\StatusInterface;
+	
 	class StatusChecker
 	{
 		

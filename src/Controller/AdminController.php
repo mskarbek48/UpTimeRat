@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Monitor;
+use App\Entity\StatusPage;
 use App\Repository\MonitorRepository;
 use App\Repository\StatusPageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,29 +47,23 @@ class AdminController extends AbstractController
 	#[Route('/monitor/new', name: 'app_admin_monitor_new')]
 	public function monitorNew(): Response
 	{
-		return $this->render('admin/monitor_new.html.twig', [
-			'controller_name' => 'AdminController'
+		return $this->render('admin/monitor_edit_create.html.twig', [
+			'editing' => false,
+			'monitor' => new Monitor()
 		]);
 	}
 	
 	#[Route('/monitor/{id}', name: 'app_admin_monitor_view')]
 	public function monitorView(int $id): Response
 	{
-		return $this->render('admin/monitor_view.html.twig', [
-			'controller_name' => 'AdminController',
+		return $this->render('admin/monitor_edit_create.html.twig', [
+			'editing' => true,
 			'monitor' => $this->monitorRepository->find($id)
 		]);
 	}
 	
 
-	
-	#[Route('/settings', name: 'app_admin_settings')]
-	public function settings(): Response
-	{
-		return $this->render('admin/settings.html.twig', [
-			'controller_name' => 'AdminController'
-		]);
-	}
+
 	
 	#[Route('/statuspage', name: 'app_admin_statuspage')]
 	public function statuspage(): Response
@@ -81,19 +77,32 @@ class AdminController extends AbstractController
 	#[Route('/statuspage/new', name: 'app_admin_statuspage_new')]
 	public function statuspageNew(): Response
 	{
-		return $this->render('admin/statuspage_new.html.twig', [
-			'controller_name' => 'AdminController'
+		$monitors = $this->monitorRepository->findAll();
+		$statusPage = new StatusPage();
+		return $this->render('admin/statuspage_edit_create.html.twig', [
+			'monitors' => $monitors,
+			'statuspage' => $statusPage
 		]);
 	}
 	
-	#[Route('/statuspage/{id}', name: 'app_admin_statuspage_view')]
-	public function statuspageView(int $id): Response
+	#[Route('/statuspage/{id}', name: 'app_admin_statuspage_edit')]
+	public function statuspageEdit(int $id): Response
 	{
 		$monitors = $this->monitorRepository->findAll();
-		return $this->render('admin/statuspage_view.html.twig', [
-			'controller_name' => 'AdminController',
-			'page' => $this->statusPageRepository->find($id),
-			'monitors' => $monitors
+		$statusPage = $this->statusPageRepository->find($id);
+		return $this->render('admin/statuspage_edit_create.html.twig', [
+			'monitors' => $monitors,
+			'statuspage' => $statusPage
+		]);
+	}
+	
+	
+	
+	#[Route('/settings', name: 'app_admin_settings')]
+	public function settings(): Response
+	{
+		return $this->render('admin/settings.html.twig', [
+			'controller_name' => 'AdminController'
 		]);
 	}
 }

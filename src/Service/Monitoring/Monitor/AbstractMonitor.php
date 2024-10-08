@@ -11,7 +11,7 @@
 	 *
 	 **/
 	
-	namespace App\Service\Monitor;
+	namespace App\Service\Monitoring\Monitor;
 	
 	abstract class AbstractMonitor
 	{
@@ -89,6 +89,8 @@
 		{
 			return $this->certInfo;
 		}
+		
+		
 		
 		
 	}

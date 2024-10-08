@@ -16,7 +16,7 @@
 		public function testValidPort()
 		{
 			
-			$portMonitor = new \App\Service\Monitor\PortMonitor();
+			$portMonitor = new \App\Service\Monitoring\Monitor\PortMonitor();
 			$portMonitor->setPort(80);
 			$portMonitor->setIpAddress("1.1.1.1");
 			$portMonitor->check();
@@ -29,7 +29,7 @@
 		
 		public function testInvalidPort()
 		{
-			$portMonitor = new \App\Service\Monitor\PortMonitor();
+			$portMonitor = new \App\Service\Monitoring\Monitor\PortMonitor();
 			$portMonitor->setPort(81);
 			$portMonitor->setIpAddress("1.1.1.1");
 			$portMonitor->check();

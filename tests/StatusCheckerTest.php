@@ -14,8 +14,8 @@
 	namespace App\Tests;
 	
 	use App\Entity\Monitor;
-	use App\Service\Monitor\HttpMonitor;
-	use App\Service\Monitor\Status\StatusUp;
+	use App\Service\Monitoring\Monitor\HttpMonitor;
+	use App\Service\Monitoring\Status\StatusUp;
 	
 	class StatusCheckerTest extends \PHPUnit\Framework\TestCase
 	{
@@ -30,7 +30,7 @@
 			$monitor->setType("website");
 			$monitor->setIntervalTime(60);
 			$monitor->setTries(1);
-			$statusChecker = new \App\Service\Monitor\StatusChecker($monitor);
+			$statusChecker = new \App\Service\Monitoring\StatusChecker($monitor);
 			$this->assertInstanceOf(HttpMonitor::class, $statusChecker->factoryMonitorService());
 			$statusChecker->check();
 			$results = $statusChecker->getStatus();
@@ -49,7 +49,7 @@
 			$monitor->setType("port");
 			$monitor->setIntervalTime(60);
 			$monitor->setTries(1);
-			$statusChecker = new \App\Service\Monitor\StatusChecker($monitor);
-			$this->assertInstanceOf(\App\Service\Monitor\PortMonitor::class, $statusChecker->factoryMonitorService());
+			$statusChecker = new \App\Service\Monitoring\StatusChecker($monitor);
+			$this->assertInstanceOf(\App\Service\Monitoring\Monitor\PortMonitor::class, $statusChecker->factoryMonitorService());
 		}
 	}

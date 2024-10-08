@@ -4,8 +4,8 @@ namespace App\Controller\Api;
 
 use App\Entity\Monitor;
 use App\Entity\MonitorStatus;
-use App\Service\Monitor\MonitorService;
-use App\Service\Monitor\Validator\MonitorValidatorFactory;
+use App\Service\Monitoring\MonitorService;
+use App\Service\Monitoring\Validator\MonitorValidatorFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -35,7 +35,6 @@ class MonitorApiController extends AbstractController
 			]);
 		}
 		
-        $data = json_decode($request->getContent(), true);
 		$validator = (new MonitorValidatorFactory($data))->factory();
 		$errors = $validator->validate($data);
 		if(!empty($errors))

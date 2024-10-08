@@ -1,0 +1,142 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+
+    <div class="container mx-auto">
+        <h1 class="text-white text-2xl font-bold mb-5">Status page</h1>
+
+        <div class="rounded-lg p-4 bg-slate-800 mb-5 flex flex-row gap-2">
+            <div class="flex flex-row w-full">
+                <div class="w-full">
+                    <label for="name" class="text-white">Name</label>
+                    <input type="text" id="name" maxlength="255" placeholder="Google Services" value="{{ statuspage.name }}"
+                           class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                </div>
+            </div>
+            <div class="flex flex-row w-full">
+                <div class="w-full">
+                    <label for="name" class="text-white">Description</label>
+                    <input type="text" id="description" maxlength="255" placeholder="Google Services is our most important services" value="{{ statuspage.description }}"
+                           class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                </div>
+            </div>
+        </div>
+
+        <div class="rounded-lg p-4 bg-slate-800 mb-5">
+            <div class="flex flex-col w-full">
+
+                <label for="monitors" class="text-white">Add monitor:</label>
+                <select id="monitor" class="outline-none bg-slate-700 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block mb-5">
+
+                    <option value="0">Select monitor</option>
+                    {% for monitor in monitors %}
+                        <option value="{{ monitor.id }}">{{ monitor.name }}</option>
+                    {% endfor %}
+
+                </select>
+
+                <div class="rounded-lg bg-slate-900 pt-6 pb-6 ps-4 pe-4 text-center text-white" id="monitor_list">
+                    No monitors added
+                </div>
+
+            </div>
+        </div>
+        <input type="hidden" value="{{ csrf_token('add-statuspage') }}" id="token" name="token">
+
+        <button type="button" class="add-page bg-indigo-600 hover:bg-indigo-500 text-white text-sm p-2 rounded-lg font-semibold">Save</button>
+
+    </div>
+
+    <script>
+        let selected = 0;
+        let monitors = [];
+        $("#monitor").on("change", function(){
+
+            let monitor_id = $(this).val();
+            let monitor_name = $(this).find("option:selected").text();
+
+            if(monitor_id == 0){
+                return;
+            }
+
+            selected++;
+
+            if(selected == 1)
+            {
+                $("#monitor_list").html("");
+            }
+
+            monitors.push(monitor_id);
+
+            $("#monitor_list").append(`
+                <div class="flex flex-row justify-between items-center bg-slate-800 rounded-lg p-2 mb-2" id="monitor_${monitor_id}">
+                <span>${monitor_name}</span>
+                <button class="text-white text-sm bg-red-600 p-1 font-semibold remove-monitor rounded-lg" id="submit-button" value="${monitor_id}" >Remove</button></div>`
+            );
+        });
+        $("#monitor_list").on("click", ".remove-monitor", function(){
+            let monitor_id = $(this).val();
+            $(`#monitor_${monitor_id}`).remove();
+            selected--;
+            monitors = monitors.filter(function(item) {
+                return item !== monitor_id;
+            });
+            if(selected == 0){
+                $("#monitor_list").html("No monitors added");
+            }
+        });
+
+       $("button.add-page").on("click", function() {
+            let name = $("#name").val();
+            let token = $("#token").val();
+
+            $.ajax({
+                url: "{{ path('api_statuspage_create') }}",
+                method: "PUT",
+                data: JSON.stringify({
+                    name: name,
+                    monitors: monitors,
+                    token: token,
+                    description: $("#description").val(),
+                    edit_id: {% if statuspage.id %} {{ statuspage.id }} {% else %} null {% endif %}
+                }),
+                success: function(response)
+                {
+                    console.log(response);
+
+                    if(response.success)
+                    {
+                        toastr.success("Status page added successfully");
+                        setTimeout(function(){
+                            window.location.href = "{{ path('app_admin_statuspage') }}";
+                        }, 1000);
+                    } else {
+                        $("#submit-button").removeAttr("disabled");
+                        response.errors.forEach(function(v){
+                            toastr.error(v);
+                        })
+                    }
+                }
+            })
+
+        });
+
+        {% if statuspage.getmonitor|length %}
+
+            $("#monitor_list").html("");
+        {% for monitor in statuspage.monitor %}
+            selected++;
+            monitors.push({{ monitor.id }});
+            $("#monitor_list").append(`
+                <div class="flex flex-row justify-between items-center bg-slate-800 rounded-lg p-2 mb-2" id="monitor_${monitor.id}">
+                <span>{{ monitor.name }}</span>
+                <button class="text-white text-sm bg-red-600 p-1 font-semibold remove-monitor rounded-lg" id="submit-button" value="{{ monitor.id }}" >Remove</button></div>`
+            );
+            $("#monitor").trigger("change");
+        {% endfor %}
+
+        {% endif %}
+    </script>
+
+
+{% endblock %}

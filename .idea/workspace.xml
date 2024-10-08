@@ -5,8 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e79857-7ac5-4e26-ad1c-ff7a947a77a6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Api/StatusPageApiController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Monitoring/Monitoring.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Monitoring/StatusPageService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/StatusPageValidator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/statuspage_edit_create.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/MonitoringTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Command/CrontabCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/CrontabCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Api/MonitorApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/MonitorApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MonitorController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/StatusPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/StatusPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/AbstractMonitor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/AbstractMonitor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/HttpMonitor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/HttpMonitor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/MonitorInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/MonitorInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/MonitorManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/StatusCheckerManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/MonitorService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/MonitorService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/PortMonitor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/PortMonitor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/Presenter/MonitorPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Presenter/MonitorPresenter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/Presenter/StatusPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Presenter/StatusPresenter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/Status.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/Status/Status.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/StatusChecker.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/StatusChecker.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/Validator/AbstractMonitorValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/AbstractMonitorValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/Validator/HttpMonitorValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/HttpMonitorValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/Validator/MonitorValidatorFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/MonitorValidatorFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/Validator/MonitorValidatorInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/MonitorValidatorInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/Validator/PingMonitorValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/PingMonitorValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitor/Validator/PortMonitorValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/PortMonitorValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Twig/MonitorStatusExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twig/MonitorStatusExtension.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/monitor_list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/monitor_list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/monitor_new.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/monitor_view.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/monitor_edit_create.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/statuspage_view.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/monitor/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/HttpMonitorTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/HttpMonitorTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/MonitorManagerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/MonitorManagerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/PortMonitorTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/PortMonitorTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/StatusCheckerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/StatusCheckerTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,21 +181,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary": "PHPUnit",
-    "git-widget-placeholder": "new",
-    "last_opened_file_path": "/home/apps/UpTimeRatv2/templates/admin",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.sync",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary&quot;: &quot;PHPUnit&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;development&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/apps/UpTimeRatv2/templates/admin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
@@ -165,11 +204,11 @@
       <window_info id="Pull Requests" show_stripe_button="false" />
       <window_info id="Settings Sync History" />
       <window_info id="Robo tasks" show_stripe_button="false" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18229166" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14824219" />
       <window_info id="Commit" order="1" weight="0.18229166" />
       <window_info id="Welcome to GitHub Copilot" order="2" show_stripe_button="false" />
       <window_info id="VcsChanges" order="3" weight="0.18229166" />
-      <window_info id="Structure" order="3" side_tool="true" weight="0.18229166" />
+      <window_info id="Structure" order="4" side_tool="true" weight="0.18229166" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
       <window_info anchor="bottom" id="TODO" show_stripe_button="false" />
@@ -177,9 +216,9 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.33055556" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.33055556" />
       <window_info anchor="bottom" id="Services" order="4" weight="0.33055556" />
-      <window_info anchor="bottom" id="Find" order="4" weight="0.3301006" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.3301006" />
       <window_info anchor="right" id="make" show_stripe_button="false" side_tool="true" />
       <window_info anchor="right" id="Coverage" show_stripe_button="false" side_tool="true" />
       <window_info anchor="right" id="Notifications" order="0" weight="0.33020833" />
@@ -197,6 +236,7 @@
       <recent name="$PROJECT_DIR$/old" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Service/Monitor/Monitor" />
       <recent name="$PROJECT_DIR$/templates/admin" />
     </key>
   </component>
@@ -288,6 +328,7 @@
       <workItem from="1728291958547" duration="4491000" />
       <workItem from="1728296471972" duration="6000" />
       <workItem from="1728296565358" duration="2317000" />
+      <workItem from="1728366571755" duration="4896000" />
     </task>
     <servers />
   </component>

@@ -14,7 +14,7 @@
 	namespace App\Tests;
 	
 	use App\Repository\MonitorRepository;
-	use App\Service\Monitor\MonitorManager;
+	use App\Service\Monitoring\StatusCheckerManager;
 	use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 	
 	class MonitorManagerTest extends KernelTestCase
@@ -26,7 +26,7 @@
 			$monitorRepository = self::getContainer()->get(MonitorRepository::class);
 			$entityManager = self::getContainer()->get('doctrine.orm.entity_manager');
 		
-			$monitorManager = new MonitorManager($monitorRepository, $entityManager);
+			$monitorManager = new StatusCheckerManager($monitorRepository, $entityManager);
 			
 			$monitorManager->checkMonitors();
 		

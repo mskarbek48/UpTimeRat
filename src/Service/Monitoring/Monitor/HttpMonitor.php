@@ -11,7 +11,9 @@
 	 *
 	 **/
 	
-	namespace App\Service\Monitor;
+	namespace App\Service\Monitoring\Monitor;
+	
+	use App\Service\Monitoring\Monitor\Status\Status;
 	
 	class HttpMonitor extends AbstractMonitor implements MonitorInterface
 	{

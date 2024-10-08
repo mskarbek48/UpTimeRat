@@ -24,6 +24,9 @@ class StatusPage
     #[ORM\ManyToMany(targetEntity: Monitor::class)]
     private Collection $monitor;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
     public function __construct()
     {
         $this->monitor = new ArrayCollection();
@@ -66,6 +69,18 @@ class StatusPage
     public function removeMonitor(Monitor $monitor): static
     {
         $this->monitor->removeElement($monitor);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }

@@ -11,14 +11,14 @@
 	 *
 	 **/
 	
-	namespace App\Service\Monitor;
+	namespace App\Service\Monitoring;
 	
 	use App\Entity\Monitor;
 	use App\Entity\MonitorStatus;
 	use App\Repository\MonitorRepository;
 	use Doctrine\ORM\EntityManagerInterface;
 	
-	class MonitorManager
+	class StatusCheckerManager
 	{
 		private MonitorRepository $monitorRepository;
 		
