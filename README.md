@@ -2,6 +2,8 @@
 
 Simple UpTime monitoring application written in PHP, framework Symfony. Currently in development.
 
+![UpTimeRat](https://i.imgur.com/EFCF2Mv.png)
+
 # Features
 * Working with HTTP, HTTPS and PORT
 * Tailwind simple modern UI
