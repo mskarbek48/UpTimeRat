@@ -14,7 +14,7 @@
     <div class="grid xxl:grid-cols-4 lg:grid-cols-2 gap-4 justify-between">
         {% for monitor in monitors %}
             <div class="col-span-1">
-                <div class="p-5 border border-slate-800 rounded-lg mb-3">
+                <div class="p-5 border border-slate-700 rounded-lg mb-3">
                     <h2 class="text-white font-bold mb-3">{{ monitor.name }}</h2>
 
                     <div class="flex flex-row justify-between items-center ">
@@ -37,10 +37,15 @@
             </div>
         {% endfor %}
     </div>
-
-
-
     </div>
+
+    <!--<div id="edit-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <div class="relative rounded-lg shadow bg-slate-800">
+                asdsa
+            </div>
+        </div>
+    </div>!-->
 
     <script>
         $(".delete-monitor").on("click", function(){
