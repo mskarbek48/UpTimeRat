@@ -13,7 +13,9 @@
 	
 	namespace App\Service\Monitoring\Validator;
 	
-	class StatusPageValidator implements MonitorValidatorInterface
+	use App\Service\Domain\Validator\ValidatorInterface;
+	
+	class StatusPageValidator implements ValidatorInterface
 	{
 		public function validate(array $data): array
 		{

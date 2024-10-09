@@ -8,10 +8,19 @@ Simple UpTime monitoring application written in PHP, framework Symfony.
 * Working with HTTP, HTTPS and PORT
 * Tailwind simple modern UI
 * Public status pages
+* Notifications via Telegram
+* Event-Driven architecture
+* Check certificate expiration date
+* Check response time
 
 # Todo:
 * Monitor UDP, PING, Heartbeat, Game Servers, DNS Record, JSON Response
-* Notifications
+* More notifications
 * API access
-* Settings
+* More settings
 * Logo on status page
+
+# Screenshots
+![UpTimeRat](https://i.imgur.com/bnYzz9N.png)
+![UpTimeRat](https://i.imgur.com/gobPnNf.png)
+![UpTimeRat](https://i.imgur.com/R6AJlFC.png)

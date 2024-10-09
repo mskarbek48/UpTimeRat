@@ -70,6 +70,15 @@
 			return $this->monitorStatus->getDate()->format("Y-m-d H:i:s");
 		}
 		
+		public function getResponseMessage(): ?string
+		{
+			return $this->monitorStatus->getMessage();
+		}
+		
+		public function getResponseCode(): ?int {
+			return $this->monitorStatus->getStatusCode();
+		}
+		
 		
 		
 	}

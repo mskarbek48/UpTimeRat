@@ -52,9 +52,16 @@ class Monitor
     #[ORM\OneToMany(targetEntity: MonitorStatus::class, mappedBy: 'monitor')]
     private Collection $monitorStatuses;
 
+    /**
+     * @var Collection<int, NotificationSettings>
+     */
+    #[ORM\ManyToMany(targetEntity: NotificationSettings::class, inversedBy: 'monitors')]
+    private Collection $notifications;
+
     public function __construct()
     {
         $this->monitorStatuses = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,6 +215,30 @@ class Monitor
                 $monitorStatus->setMonitor(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, NotificationSettings>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(NotificationSettings $notification): static
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(NotificationSettings $notification): static
+    {
+        $this->notifications->removeElement($notification);
 
         return $this;
     }

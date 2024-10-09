@@ -13,13 +13,15 @@
 	
 	namespace App\Service\Monitoring\Validator;
 	
+	use App\Service\Domain\Validator\ValidatorInterface;
+
 
 	
 	class MonitorValidatorFactory
 	{
 		public function __construct(private array $data){}
 		
-		public function factory(): MonitorValidatorInterface
+		public function factory(): ValidatorInterface
 		{
 			if(!empty($this->data['type']))
 			{

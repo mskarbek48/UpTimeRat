@@ -33,10 +33,10 @@
 			
 			$last_statuses = $monitorPresenter->getLastStatuses($limit);
 			
-			$html = '<div class="flex gap-1 overflow-auto">';
+			$html = '<div class="max-w-32 sm:max-w-xs md:max-w-sm lg:max-w-xs xl:max-w-xl xxl:max-w-xl overflow-auto whitespace-nowrap">';
 			foreach(array_reverse($last_statuses) as $once)
 			{
-				$html .= '<span class="w-1 h-5 rounded-lg block '.$once->getTailwindBlockClass().'"></span>';
+				$html .= '<span class="w-1 h-5 rounded-lg  inline-block me-1 '.$once->getTailwindBlockClass().'"></span>';
 			}
 			$html .= '</div>';
 			
@@ -90,6 +90,8 @@
 					return '<div class="text-green-500 font-semibold flex flex-row justify-end gap-2 items-center"> Operational <span class="pulse-green h-2 w-2 block"></span></div>';
 				case "DOWN":
 					return '<div class="text-red-500 font-semibold flex flex-row justify-end gap-2 items-center"> Down <span class="pulse-red h-2 w-2 block"></span></div>';
+				case "SEEMS DOWN":
+					return '<div class="text-orange-500 font-semibold flex flex-row justify-end gap-2 items-center"> Seems Down <span class="pulse-orange h-2 w-2 block"></span></div>';
 				case "UNKNOWN":
 					return '<div class="text-yellow-500 font-semibold flex flex-row justify-end gap-2 items-center"> Unknown <span class="pulse-yellow h-2 w-2 block"></span></div>';
 			}

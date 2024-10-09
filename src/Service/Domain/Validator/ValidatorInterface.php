@@ -3,17 +3,17 @@
 	 * This file is a part of UpTimeRatv2
 	 *
 	 * @author Maciej Skarbek <macieqskarbek@gmail.com>
-	 * @copyright (c) 2024, mskarbek.pl
+	 * @copyright (c) 2024, dBot.pl
 	 * @license https://opensource.org/licenses/gpl-license.php GNU Public License
-	 * @link https://mskarbek.pl
+	 * @link https://dbot.pl
 	 *
-	 * @created/updated at 10/7/24 10:39 AM
+	 * @created/updated at 10/9/24 10:36 AM
 	 *
 	 **/
 	
-	namespace App\Service\Monitoring\Validator;
+	namespace App\Service\Domain\Validator;
 	
-	interface MonitorValidatorInterface
+	interface ValidatorInterface
 	{
 		public function validate(array $data): array;
 	}

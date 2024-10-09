@@ -1,0 +1,213 @@
+
+
+                <form id="form">
+                    <div class="flex flex-row gap-2">
+                        <div class="flex flex-col mb-4 w-full">
+                            <div class="">
+                                <label for="name" class="text-white text-sm mb-2">Name</label>
+                                <input type="text" id="name" maxlength="255" placeholder="Google Website" value="{{ monitor.name }}"
+                                       class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                            </div>
+                        </div>
+                        <div class="flex flex-col mb-4 w-full">
+                            <div>
+                                <label for="shortname" class="text-white text-sm text-sm mb-2">Short name</label>
+                                <input type="text" id="shortname" maxlength="15" name="shortname" placeholder="google" value="{{ monitor.shortname }}"
+                                       class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col mb-4">
+                        <label for="type" class="text-white text-sm text-sm mb-1">Type</label>
+                        <select name="type" id="type" class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                            <option value="website" {% if monitor.type=='website' %}selected{% endif %}>Website (HTTP)</option>
+                            <option value="ping" {% if monitor.type=='ping' %}selected{% endif %}>Ping</option>
+                            <option value="port" {% if monitor.type=='port' %}selected{% endif %}>Port</option>
+
+                        </select>
+                    </div>
+                    <div class="flex flex-col mb-4" id="url_wrapper">
+                        <label for="url" class="text-white text-sm">URL</label>
+                        <input type="text" id="url" name="url" value="{{ monitor.url }}"
+                               class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                    </div>
+                    <div class="flex flex-col mb-4 hidden" id="ip_wrapper">
+                        <label for="name" class="text-white text-sm ">IP Address</label>
+                        <div class="flex flex-row">
+                            <input type="text" id="ip" value="{{ monitor.ipaddress }}"
+                                   class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 w-full block rounded-l-lg border border-slate-600 border-r-0 text-right w-36">
+                            <span class="block border border-s-0 border-e-0 bg-slate-600 border-slate-600 text-white font-bold text-xl pb-2 pt-2 ps-3 pe-3" id="ip_separator">:</span>
+                            <input  value="{{ monitor.port }}"
+                                    type="text" id="port" class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 rounded-r-lg border border-slate-600 border-l-0 w-16" name="port">
+                        </div>
+
+                    </div>
+                    <div class="flex flex-row gap-2">
+                        <div class="flex flex-col mb-4 w-full">
+                            <div>
+                                <label for="name" class="text-white text-sm ">Interval (Minutes)</label>
+                                <input type="number" min="1" id="interval" name="interval" value="{{ monitor.intervaltime / 60 }}"
+                                       class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                            </div>
+
+                        </div>
+                        <div class="flex flex-col mb-4 w-full">
+                            <div>
+                                <label for="name" class="text-white text-sm">Tries</label>
+                                <input type="text" id="tries" name="tries" value="{{ monitor.tries }}"
+                                       class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-row gap-2">
+                        <div class="flex flex-col mb-4 w-full">
+                            <div>
+                                <label for="notifications" class="text-white text-sm">Notifications</label>
+                                <select name="notifications" id="notifications" class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block">
+                                    {% if notifications|length %}
+                                        <option value="0">Select notification</option>
+                                        {% for notification in notifications %}
+                                            <option value="{{ notification.id }}">{{ notification.name }}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        <option selected>No notifications available.</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div id="notifications_selected">
+                                {% if monitor.notifications|length %}
+                                    {% for notification in monitor.notifications %}
+                                        <div class='flex items-center flex-row gap-3 mt-2' id='notify_{{ notification.id }}'><div class='text-white'>{{ notification.name }}</div><a href="#" value='{{ notification.id }}' class='text-red-400 delete-notification'>Delete</a></div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="edit_id" value="{{ monitor.id }}">
+                    <input type="hidden" value="{{ csrf_token('add-monitor') }}" id="token" name="token">
+
+                    <button type="submit" id="submit-button" class="bg-indigo-500 text-sm font-semibold hover:bg-indigo-600 text-white rounded-lg pt-2 pb-2 ps-5 pe-5 mt-5">Save</button>
+
+                </form>
+
+
+    <script>
+
+        if(typeof notifications == 'undefined')
+        {
+            let notifications = [];
+        } else {
+            notifications = [];
+        }
+
+        {% if monitor.notifications|length %}
+        {% for notification in monitor.notifications %}
+        notifications.push({{ notification.id }});
+        {% endfor %}
+        {% endif %}
+
+
+
+
+        $("#notifications").on("change", function(e){
+
+            let value = $(this).val();
+            if(value != 0)
+            {
+                if(notifications.indexOf(value) == -1)
+                {
+                    notifications.push(value);
+                    $("#notifications_selected").append("<div class='flex items-center flex-row gap-3 mt-2' id='notify_"+value+"'><div class='text-white'>" + $("#notifications option:selected").text() + "</div><a href='#' value='"+value+"' class='text-red-400 delete-notification'>Delete</a></div>");
+                }
+            }
+            $("#notifications").val(0);
+        });
+
+        $("#notifications_selected").on("click", ".delete-notification", function(e){
+            let value = $(this).attr("value");
+            $("#notify_"+value).remove();
+            notifications = notifications.filter(function(v){
+                return v != value;
+            });
+        });
+
+        $("#type").on("change", function(e){
+
+            let value = $(this).val();
+            if(value != 'website')
+            {
+                $("#ip_wrapper").removeClass("hidden");
+                $("#url_wrapper").addClass("hidden");
+                if(value == 'ping')
+                {
+                    $("#port").addClass("hidden");
+                    $("#ip_separator").addClass("hidden");
+                    $("#ip").removeClass("border-r-0");
+                    $("#ip").addClass("rounded-r-lg");
+                } else {
+                    $("#port").removeClass("hidden");
+                    $("#ip_separator").removeClass("hidden");
+                    $("#ip").removeClass("rounded-r-lg");
+                    $("#ip").addClass("border-r-0");
+
+                }
+            } else {
+                $("#url_wrapper").removeClass("hidden");
+                $("#ip_wrapper").addClass("hidden");
+            }
+        });
+
+        $("#form").on("submit", function(e){
+            e.preventDefault();
+
+            $("#submit-button").attr("disabled", "disabled");
+
+            let data = {
+                name: $("#name").val(),
+                shortname: $("#shortname").val(),
+                type: $("#type").val(),
+                url: $("#url").val(),
+                ip: $("#ip").val(),
+                port: $("#port").val(),
+                interval: $("#interval").val() * 60,
+                tries: $("#tries").val(),
+                token: $("#token").val(),
+                edit_id: $("#edit_id").val(),
+                notifications: notifications
+            };
+
+            $.ajax({
+                url: "{{ path('app_monitor_api_add') }}",
+                method: "PUT",
+                data: JSON.stringify(data),
+                success: function(response){
+
+                    console.log(response);
+
+                    if(response.success)
+                    {
+                        toastr.success("Monitor added/updated successfully");
+
+                        window.location.reload()
+
+                    } else {
+                        $("#submit-button").removeAttr("disabled");
+                        response.errors.forEach(function(v){
+                            toastr.error(v);
+                        })
+                    }
+
+                }
+
+            });
+
+        });
+
+        $("#type").trigger("change");
+
+
+
+    </script>
+

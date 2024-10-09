@@ -13,7 +13,9 @@
 	
 	namespace App\Service\Monitoring\Validator;
 	
-	abstract class AbstractMonitorValidator
+	use App\Service\Domain\Validator\ValidatorInterface;
+	
+	abstract class AbstractMonitorValidator implements ValidatorInterface
 	{
 		public function validate(array $data): array
 		{

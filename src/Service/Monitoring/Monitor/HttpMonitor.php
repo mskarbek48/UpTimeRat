@@ -50,6 +50,7 @@
 					$this->status_code = $e->getCode();
 					$this->response_time = 0;//microtime(true) - $start;
 					$this->response_body = $e->getMessage();
+					$this->status_message = $e->getMessage();
 					$this->response_headers = [];
 					$this->certInfo = [];
 					

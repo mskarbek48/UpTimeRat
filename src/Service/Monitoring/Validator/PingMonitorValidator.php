@@ -13,7 +13,9 @@
 	
 	namespace App\Service\Monitoring\Validator;
 	
-	class PingMonitorValidator extends AbstractMonitorValidator implements MonitorValidatorInterface
+	use App\Service\Domain\Validator\ValidatorInterface;
+	
+	class PingMonitorValidator extends AbstractMonitorValidator implements ValidatorInterface
 	{
 		public function validate(array $data): array
 		{

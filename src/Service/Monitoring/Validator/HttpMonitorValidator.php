@@ -13,7 +13,9 @@
 	
 	namespace App\Service\Monitoring\Validator;
 	
-	class HttpMonitorValidator extends AbstractMonitorValidator implements MonitorValidatorInterface
+	use App\Service\Domain\Validator\ValidatorInterface;
+	
+	class HttpMonitorValidator extends AbstractMonitorValidator implements ValidatorInterface
 	{
 		public function validate(array $data): array
 		{

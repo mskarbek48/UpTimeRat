@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Monitor;
 use App\Entity\StatusPage;
 use App\Repository\MonitorRepository;
+use App\Repository\NotificationSettingsRepository;
 use App\Repository\StatusPageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 #[Route('/admin')]
 #[IsGranted('ROLE_ADMIN')]
@@ -20,10 +23,13 @@ class AdminController extends AbstractController
 	
 	private StatusPageRepository $statusPageRepository;
 	
-	public function __construct(MonitorRepository $monitorRepository, StatusPageRepository $statusPageRepository)
+	private NotificationSettingsRepository $notificationSettingsRepository;
+	
+	public function __construct(MonitorRepository $monitorRepository, StatusPageRepository $statusPageRepository, NotificationSettingsRepository $notificationSettingsRepository)
 	{
 		$this->monitorRepository = $monitorRepository;
 		$this->statusPageRepository = $statusPageRepository;
+		$this->notificationSettingsRepository = $notificationSettingsRepository;
 	}
 	
     #[Route('/dashboard', name: 'app_admin_dashboard')]
@@ -45,8 +51,16 @@ class AdminController extends AbstractController
 	}
 	
 	#[Route('/monitor/new', name: 'app_admin_monitor_new')]
-	public function monitorNew(): Response
+	public function monitorNew(Request $request): Response
 	{
+		if($request->isXmlHttpRequest())
+		{
+			return $this->render('admin/modal/monitor_edit_create.html.twig', [
+				'editing' => false,
+				'monitor' => new Monitor(),
+				'notifications' => $this->notificationSettingsRepository->findAll()
+			]);
+		}
 		return $this->render('admin/monitor_edit_create.html.twig', [
 			'editing' => false,
 			'monitor' => new Monitor()
@@ -54,8 +68,17 @@ class AdminController extends AbstractController
 	}
 	
 	#[Route('/monitor/{id}', name: 'app_admin_monitor_view')]
-	public function monitorView(int $id): Response
+	public function monitorView(int $id, Request $request): Response
 	{
+		$notifications = $this->notificationSettingsRepository->findAll();
+		if($request->isXmlHttpRequest())
+		{
+			return $this->render('admin/modal/monitor_edit_create.html.twig', [
+				'editing' => true,
+				'monitor' => $this->monitorRepository->find($id),
+				'notifications' => $notifications
+			]);
+		}
 		return $this->render('admin/monitor_edit_create.html.twig', [
 			'editing' => true,
 			'monitor' => $this->monitorRepository->find($id)
@@ -90,9 +113,10 @@ class AdminController extends AbstractController
 	{
 		$monitors = $this->monitorRepository->findAll();
 		$statusPage = $this->statusPageRepository->find($id);
+
 		return $this->render('admin/statuspage_edit_create.html.twig', [
 			'monitors' => $monitors,
-			'statuspage' => $statusPage
+			'statuspage' => $statusPage,
 		]);
 	}
 	
@@ -101,8 +125,18 @@ class AdminController extends AbstractController
 	#[Route('/settings', name: 'app_admin_settings')]
 	public function settings(): Response
 	{
+		$notifications = $this->notificationSettingsRepository->findAll();
+		
 		return $this->render('admin/settings.html.twig', [
-			'controller_name' => 'AdminController'
+			'controller_name' => 'AdminController',
+			'notifications' => $notifications
 		]);
+	}
+	
+	#[Route('/settings/components/{type}/{name}', name: 'app_admin_settings_components')]
+	public function getComponent(string $type, string $name)
+	{
+		$path = 'admin/components/' . $type . '/' . $name . '.html.twig';
+		return $this->render($path);
 	}
 }

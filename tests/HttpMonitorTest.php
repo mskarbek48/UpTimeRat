@@ -75,6 +75,17 @@
 			$this->assertEquals(false, $status->isUp([404]));
 		}
 		
+		public function testNotWorked()
+		{
+			$example = new HttpMonitor();
+			$example->setUrl("https://emtra.pl");
+			$example->check();
+			
+			$status = $example->getStatus();
+			
+			print_r($status);
+		}
+		
 		public function testCustomStatus()
 		{
 			$example = new HttpMonitor();

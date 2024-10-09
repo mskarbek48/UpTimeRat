@@ -15,6 +15,7 @@
 	
 	use App\Entity\Monitor;
 	use App\Entity\MonitorStatus;
+	use App\Entity\NotificationSettings;
 	use Symfony\Component\HttpFoundation\JsonResponse;
 	
 	class MonitorService
@@ -35,6 +36,17 @@
 			$monitor->setType($data['type']);
 			$monitor->setIntervalTime($data['interval']);
 			
+			if(isset($data['notifications']))
+			{
+				foreach ($data['notifications'] as $notification) {
+					$notification = $this->entityManager->getRepository(NotificationSettings::class)->find($notification);
+					if($notification)
+					{
+						$monitor->addNotification($notification);
+					}
+				}
+			}
+			
 			$this->entityManager->persist($monitor);
 			$this->entityManager->flush();
 		}
@@ -54,6 +66,25 @@
 			$monitor->setTries($data['tries']);
 			$monitor->setType($data['type']);
 			$monitor->setIntervalTime($data['interval']);
+			
+			if(isset($data['notifications']))
+			{
+				foreach($data['notifications'] as $notification)
+				{
+					$notification = $this->entityManager->getRepository(NotificationSettings::class)->find($notification);
+					if($notification && !$monitor->getNotifications()->contains($notification))
+					{
+						$monitor->addNotification($notification);
+					}
+				}
+				foreach($monitor->getNotifications() as $notification)
+				{
+					if(!in_array($notification->getId(), $data['notifications']))
+					{
+						$monitor->removeNotification($notification);
+					}
+				}
+			}
 			
 			$this->entityManager->persist($monitor);
 			$this->entityManager->flush();

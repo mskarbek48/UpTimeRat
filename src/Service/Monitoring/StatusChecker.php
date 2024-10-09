@@ -72,9 +72,10 @@
 					}
 				}
 				
-				if(!$this->status->isValidCert())
+				if(!$this->status->isValidCert() && $this->status->isUp())
 				{
 					$issues = true;
+					$this->status->setMessage("Invalid SSL certificate");
 				}
 			} else {
 				if($this->status->isUp())

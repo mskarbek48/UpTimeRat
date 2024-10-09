@@ -90,7 +90,15 @@
 			return $this->certInfo;
 		}
 		
+		public function getMessage()
+		{
+			return $this->status_message;
+		}
 		
+		public function setMessage(string $message): void
+		{
+			$this->status_message = $message;
+		}
 		
 		
 	}

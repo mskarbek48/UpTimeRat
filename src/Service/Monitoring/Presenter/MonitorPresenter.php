@@ -59,6 +59,10 @@
 			return $results;
 		}
 		
+		public function getName(): string {
+			return $this->monitor->getName();
+		}
+		
 		
 		
 	}

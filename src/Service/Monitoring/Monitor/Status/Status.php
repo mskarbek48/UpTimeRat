@@ -41,6 +41,11 @@
 			return $this->monitor->getStatusCode();
 		}
 		
+		public function getMessage()
+		{
+			return $this->monitor->getMessage();
+		}
+		
 		public function getCertInfo(): array
 		{
 			return $this->monitor->getCertInfo();
@@ -64,6 +69,11 @@
 			}
 			
 			return true;
+		}
+		
+		public function setMessage(string $message)
+		{
+			$this->monitor->setMessage($message);
 		}
 		
 		public function isValidCert(): bool

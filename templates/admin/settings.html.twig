@@ -2,8 +2,98 @@
 
 {% block content %}
 
-    <div class="container mx-auto flex items-center justify-center">
-        <h2 class="text-white text-2xl font-bold">Settings</h2>
+    <div class="container mx-auto justify-center flex">
+        <div class="w-1/2">
+            <h2 class="text-white text-2xl font-bold mb-5">Settings</h2>
+            <div class="p-4 rounded-lg bg-slate-700 mb-5">
+                <h2 class="text-white text-xl font-bold mb-5">Add notification</h2>
+                <div class="flex flex-col gap-2">
+                    <label for="select_notify" class="text-white">Select notification: </label>
+                    <select name="select-notify" id="select_notify" class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block mb-2">
+                        <option>Select</option>
+                        <option value="telegram">Telegram</option>
+                    </select>
+                    <form id="add_notify" value="">
+                        <div id="notify_settings" class="mb-5"></div>
+                        <div id="add_notify_buttons" class="hidden">
+                            <div class="flex flex-col mb-5">
+                                <label for="name" class="text-white">Friendly name</label>
+                                <input type="text" name="notify_name" id="notify_name" class="outline-none bg-slate-600 text-white pb-2 pt-2 ps-3 pe-3 rounded-lg border border-slate-600 w-full block mb-2">
+                            </div>
+                            <input type="hidden" name="token" value="{{ csrf_token('add-notify') }}">
+                            <button type="submit" id="submit_button" class="bg-indigo-500 font-semibold text-white text-sm rounded-lg ps-4 pe-4 pb-1 pt-1 me-2">Add</button>
+                            <!--<button class="bg-yellow-800 font-semibold text-white text-sm rounded-lg ps-4 pe-4 pb-1 pt-1">Test</button>!-->
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <h2 class="text-white text-xl font-bold mb-5">Available notifications</h2>
+            {% if notifications|length %}
+                {% for notify in notifications %}
+                    <div class="rounded-lg bg-slate-800 p-4">
+                        <div class="flex justify-between">
+                            <h2 class="text-white text-md font-semibold">{{ notify.name }} <span class="text-slate-400">({{ notify.type }})</span></h2>
+                            <button class="text-red-500 hover:text-red-600 font-semibold">Delete</button>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            {% else %}
+
+            {% endif %}
+
+        </div>
     </div>
+
+    <script>
+        $("#select_notify").on("change", function(){
+            let val = $(this).val();
+            $.ajax({
+                url: "/admin/settings/components/notifications/" + val,
+                type: "GET",
+                success: function(data){
+                    $("#notify_settings").html(data);
+                    $("#add_notify_buttons").removeClass("hidden");
+                    $("#add_notify").attr("value", val);
+                }
+            })
+        });
+        $("#add_notify").on("submit", function(e){
+            e.preventDefault();
+
+
+            $("#submit_button").attr("disabled", true);
+            let formdata = $(this).serializeArray();
+            let data = {};
+            formdata.forEach((value, key) => {
+                data[value['name']] = value['value'];
+            });
+
+            data['type'] = $("#select_notify").val();
+
+
+            $.ajax({
+                url: '{{ path('app_notification_api_add') }}',
+                type: "PUT",
+                data: JSON.stringify(data),
+                success: function(data){
+                    if(data.success)
+                    {
+                        toastr.success("Notification added successfully");
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        $("#submit_button").attr("disabled", false);
+                        data.errors.forEach(function(v){
+                            toastr.error(v);
+                        })
+                    }
+                }
+            })
+        });
+    </script>
 
 {% endblock %}

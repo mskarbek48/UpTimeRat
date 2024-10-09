@@ -5,11 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12e79857-7ac5-4e26-ad1c-ff7a947a77a6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Event/MonitorStatusChangedEvent.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/EventListener/MonitorStatusChangedNotification.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Domain/Api/Api.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Domain/Validator/ValidatorInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Monitoring/Presenter/NotificationPresenter.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Notification/Channel/ChannelFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Notification/Channel/ChannelInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Notification/Channel/TelegramChannel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Notification/NotificationService.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Notification/Validator/AbstractNotificationValidator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Notification/Validator/TelegramValidator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Notification/Validator/ValidatorFactory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/components/notifications/telegram.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/modal/monitor_edit_create.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/EventTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/UpTimeRatv2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UpTimeRatv2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/monitor_edit_create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/monitor_edit_create.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Monitor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Monitor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/AbstractMonitor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/AbstractMonitor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/HttpMonitor.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/HttpMonitor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/Status/Status.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Monitor/Status/Status.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/MonitorService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/MonitorService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Presenter/MonitorPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Presenter/MonitorPresenter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Presenter/StatusPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Presenter/StatusPresenter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/StatusChecker.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/StatusChecker.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/StatusCheckerManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/StatusCheckerManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Validator/AbstractMonitorValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/AbstractMonitorValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Validator/HttpMonitorValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/HttpMonitorValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Validator/MonitorValidatorFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/MonitorValidatorFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Validator/MonitorValidatorInterface.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Validator/PingMonitorValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/PingMonitorValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Validator/PortMonitorValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/PortMonitorValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/Monitoring/Validator/StatusPageValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/Monitoring/Validator/StatusPageValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Twig/MonitorStatusExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twig/MonitorStatusExtension.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/monitor_list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/monitor_list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/settings.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/settings.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/HttpMonitorTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/HttpMonitorTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,6 +175,12 @@
       <path value="$PROJECT_DIR$/vendor/symfony/security-csrf" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-core" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-http" />
+      <path value="$PROJECT_DIR$/vendor/symfony/notifier" />
+      <path value="$PROJECT_DIR$/vendor/symfony/mime" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/telegram-notifier" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -147,10 +193,13 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;PHP Script.MonitorStatusChangedNotification.php.executor&quot;: &quot;Run&quot;,
+    &quot;PHPUnit.EventTest.executor&quot;: &quot;Run&quot;,
+    &quot;PHPUnit.HttpMonitorTest.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;com.jetbrains.php.phpunit.codeGeneration.PhpNewTestDialog.defaultLibrary&quot;: &quot;PHPUnit&quot;,
     &quot;git-widget-placeholder&quot;: &quot;development&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/apps/UpTimeRatv2/templates/admin&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/apps/UpTimeRatv2/templates/admin/modal&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -168,7 +217,7 @@
       <window_info id="Pull Requests" show_stripe_button="false" />
       <window_info id="Settings Sync History" />
       <window_info id="Robo tasks" show_stripe_button="false" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.080273435" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12589286" />
       <window_info id="Commit" order="1" weight="0.18229166" />
       <window_info id="Welcome to GitHub Copilot" order="2" show_stripe_button="false" />
       <window_info id="VcsChanges" order="3" weight="0.18229166" />
@@ -180,9 +229,10 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.23527299" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.3147619" />
       <window_info anchor="bottom" id="Services" order="4" weight="0.33055556" />
-      <window_info anchor="bottom" id="Find" order="5" weight="0.3301006" />
+      <window_info active="true" anchor="bottom" id="Run" order="5" visible="true" weight="0.3147619" />
+      <window_info anchor="bottom" id="Find" order="6" weight="0.3301006" />
       <window_info anchor="right" id="make" show_stripe_button="false" side_tool="true" />
       <window_info anchor="right" id="Coverage" show_stripe_button="false" side_tool="true" />
       <window_info anchor="right" id="Notifications" order="0" weight="0.33020833" />
@@ -191,15 +241,18 @@
       <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
       <window_info anchor="right" id="Maven" order="4" weight="0.25" />
       <window_info anchor="right" id="github.copilotToolWindow" order="5" show_stripe_button="false" />
-      <window_info anchor="right" id="GitHub Copilot Chat" order="6" weight="0.33020833" />
+      <window_info anchor="right" id="GitHub Copilot Chat" order="6" weight="0.33005953" />
     </layout>
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/admin/modal" />
       <recent name="$PROJECT_DIR$/templates/admin" />
       <recent name="$PROJECT_DIR$/old" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/admin/components/notifications" />
+      <recent name="$PROJECT_DIR$/templates/admin/components" />
       <recent name="$PROJECT_DIR$/src/Service/Monitor/Monitor" />
       <recent name="$PROJECT_DIR$/templates/admin" />
     </key>
@@ -241,8 +294,11 @@
         <option value="php-symfony_finder-970fd879c5a4-581d5f84" />
         <option value="php-symfony_flex-970fd879c5a4-82166b49" />
         <option value="php-symfony_framework_bundle-970fd879c5a4-9eeb8a65" />
+        <option value="php-symfony_http_client-970fd879c5a4-f4d943f6" />
+        <option value="php-symfony_http_client_contracts-970fd879c5a4-fcc795b7" />
         <option value="php-symfony_http_foundation-970fd879c5a4-3cc58230" />
         <option value="php-symfony_http_kernel-970fd879c5a4-382d1787" />
+        <option value="php-symfony_mime-970fd879c5a4-49bf688a" />
         <option value="php-symfony_process-970fd879c5a4-eb2dee07" />
         <option value="php-symfony_property_access-970fd879c5a4-65ce992c" />
         <option value="php-symfony_property_info-970fd879c5a4-aef9d395" />
@@ -293,7 +349,9 @@
       <workItem from="1728296471972" duration="6000" />
       <workItem from="1728296565358" duration="2317000" />
       <workItem from="1728366571755" duration="6008000" />
-      <workItem from="1728373329555" duration="1366000" />
+      <workItem from="1728373329555" duration="1415000" />
+      <workItem from="1728387267959" duration="12064000" />
+      <workItem from="1728459147024" duration="11131000" />
     </task>
     <servers />
   </component>
