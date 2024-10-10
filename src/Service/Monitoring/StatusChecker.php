@@ -19,6 +19,7 @@
 	use App\Service\Monitoring\Monitor\PortMonitor;
 	use App\Service\Monitoring\Monitor\Status\Status;
 	use App\Service\Monitoring\Status\StatusInterface;
+	use App\Service\Monitoring\Monitor\PingMonitor;
 	
 	class StatusChecker
 	{
@@ -43,6 +44,10 @@
 				case "website":
 					$this->monitorService = new HttpMonitor();
 					$this->monitorService->setUrl($this->monitor->getUrl());
+					break;
+				case "ping":
+					$this->monitorService = new PingMonitor();
+					$this->monitorService->setIpAddress($this->monitor->getIpAddress());
 					break;
 			}
 			

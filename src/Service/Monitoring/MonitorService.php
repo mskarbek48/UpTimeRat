@@ -33,6 +33,7 @@
 			$monitor->setUrl(strlen($data['url']) ? $data['url'] : null);
 			$monitor->setPort(strlen($data['port']) ? $data['port'] : null);
 			$monitor->setTries($data['tries']);
+			$monitor->setIpAddress(strlen($data['ip']) ? $data['ip'] : null);
 			$monitor->setType($data['type']);
 			$monitor->setIntervalTime($data['interval']);
 			
@@ -63,6 +64,7 @@
 			$monitor->setShortName($data['shortname']);
 			$monitor->setUrl(strlen($data['url']) ? $data['url'] : null);
 			$monitor->setPort(strlen($data['port']) ? $data['port'] : null);
+			$monitor->setIpAddress(strlen($data['ip']) ? $data['ip'] : null);
 			$monitor->setTries($data['tries']);
 			$monitor->setType($data['type']);
 			$monitor->setIntervalTime($data['interval']);

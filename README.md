@@ -14,7 +14,7 @@ Simple UpTime monitoring application written in PHP, framework Symfony.
 * Check response time
 
 # Todo:
-* Monitor UDP, PING, Heartbeat, Game Servers, DNS Record, JSON Response
+* Monitor Heartbeat, Game Servers, DNS Record, JSON Response
 * More notifications
 * API access
 * More settings
