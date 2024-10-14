@@ -27,6 +27,7 @@
 				$this->is_reachable = $results['success'];
 				$this->response_time = $results['time'];
 				$this->status_code = $results['success'] ? 1 : 0;
+				$this->status_message = $results['success'] ? "Ping successful" : "Ping failed";
 				$this->status = new Status($this);
 				
 			} else {
@@ -45,7 +46,6 @@
 					return array('success' => false, 'ping' => 0, 'time' => 0, 'packet_loss' => 100);
 				}
 				
-				print_r($out);
 				$packet_loss = 100;
 				$times = [];
 				foreach($out as $line)

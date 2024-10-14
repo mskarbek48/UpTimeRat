@@ -32,6 +32,9 @@
 					$execution_time = $end - $start;
 					$this->response_time = $execution_time;
 					$this->is_reachable = true;
+					$this->status_message = "OK";
+				} else {
+					$this->status_message = "Connection failed ($errstr)";
 				}
 				$this->status = new Status($this);
 			}

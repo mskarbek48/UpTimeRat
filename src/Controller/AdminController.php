@@ -7,6 +7,7 @@ use App\Entity\StatusPage;
 use App\Repository\MonitorRepository;
 use App\Repository\NotificationSettingsRepository;
 use App\Repository\StatusPageRepository;
+use App\Service\Monitoring\Presenter\MonitorPresenter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,6 +86,18 @@ class AdminController extends AbstractController
 		]);
 	}
 	
+	#[Route('/uptime/{id}', name: 'app_admin_uptime_view')]
+	public function uptimeView(int $id): Response
+	{
+		$monitor = $this->monitorRepository->find($id);
+		$monitorPresenter = new MonitorPresenter($monitor);
+		return $this->render('admin/uptime.html.twig', [
+			'monitor' => $monitor,
+			'monitorPresenter' => $monitorPresenter
+			
+		]);
+	}
+	
 
 
 	
@@ -102,7 +115,7 @@ class AdminController extends AbstractController
 	{
 		$monitors = $this->monitorRepository->findAll();
 		$statusPage = new StatusPage();
-		return $this->render('admin/statuspage_edit_create.html.twig', [
+		return $this->render('admin/modal/statuspage_edit_create.html.twig', [
 			'monitors' => $monitors,
 			'statuspage' => $statusPage
 		]);
@@ -114,7 +127,7 @@ class AdminController extends AbstractController
 		$monitors = $this->monitorRepository->findAll();
 		$statusPage = $this->statusPageRepository->find($id);
 
-		return $this->render('admin/statuspage_edit_create.html.twig', [
+		return $this->render('admin/modal/statuspage_edit_create.html.twig', [
 			'monitors' => $monitors,
 			'statuspage' => $statusPage,
 		]);

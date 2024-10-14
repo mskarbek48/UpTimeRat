@@ -6,19 +6,27 @@
         <h1 class="text-white text-2xl font-bold mb-5">Status page list</h1>
 
         <div class="text-right">
-            <a class="block text-xs text-white font-bold bg-indigo-600 ms-auto w-fit mb-3 p-2 rounded-lg hover:bg-indigo-500" href="/admin/statuspage/new">Add new status page</a>
+            <button data-modal-target="edit-modal" data-modal-toggle="edit-modal" value="new" class="edit-page block text-xs text-white font-bold bg-indigo-600 ms-auto w-fit mb-3 p-2 rounded-lg hover:bg-indigo-500">Add new status page</button>
         </div>
 
-        <div class="grid xxl:grid-cols-6 lg:grid-cols-4 gap-4 justify-between">
+        <div class="grid grid-cols-1 xxl:grid-cols-4 lg:grid-cols-2 gap-7 justify-between">
             {% for page in pages %}
-                <div class="col-span-1">
-                    <div class="p-5 bg-slate-800 rounded-lg mb-3 text-center">
-                        <h2 class="text-white font-bold mb-3">{{ page.name }}</h2>
-                        <div class=" flex flex-row gap-2 justify-center mb-2">
-                            <a href="/status/page/{{ page.id }}" class="bg-emerald-600 font-semibold text-white rounded-lg text-xs pt-1 pb-1 ps-2 pe-2">View</a>
-                            <a href="/admin/statuspage/{{ page.id }}" class="bg-indigo-600 font-semibold text-white rounded-lg text-xs pt-1 pb-1 ps-2 pe-2">Edit</a>
-                            <a href="#" class="bg-red-800 font-semibold text-red-200 rounded-lg text-xs pt-1 pb-1 ps-2 pe-2 delete-statuspage" value="{{ page.id }}">Delete</a>
-                        </div>
+                <div class="col-span-1 p-5 border border-slate-700 bg-slate-800 rounded-lg  ">
+                    <div class="">
+                        <h2 class="text-white font-bold mb-3 flex flex-row gap-3">{{ page.name }}
+                            <div class=" flex flex-row gap-2 justify-center mb-2">
+                                <a href="/status/page/{{ page.id }}"  class="bg-indigo-600 font-semibold text-white rounded-lg text-xs pt-1 pb-1 ps-2 pe-2  "><i class="fa-solid fa-eye"></i> View</a>
+                                <button data-modal-target="edit-modal" data-modal-toggle="edit-modal" value="{{ page.id }}" class="edit_button bg-indigo-600 font-semibold text-white rounded-lg text-xs pt-1 pb-1 ps-2 pe-2 edit-page "><i class="fa-solid fa-gears"></i> Edit</button>
+                                <a href="#" class="bg-red-800 font-semibold text-red-200 rounded-lg text-xs pt-1 pb-1 ps-2 pe-2 delete-statuspage" value="{{ page.id }}"><i class="fa-solid fa-trash"></i> Delete</a>
+                            </div>
+                        </h2>
+                        <p class="text-slate-200">Monitors:</p>
+                        <ul class="list-disc">
+                            {% for monitor in page.monitor %}
+                                <li class="ms-5 text-slate-400">{{ monitor.name }}</li>
+                            {% endfor %}
+                        </ul>
+
                     </div>
                 </div>
             {% endfor %}
@@ -26,4 +34,37 @@
 
     </div>
 
+    <div id="edit-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full z-index-50">
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <div class="relative rounded-lg shadow bg-slate-700 p-10" id="">
+                <div class="flex justify-between pb-4 mb-4 block w-full border-b border-slate-600">
+                    <h2 class="text-white font-bold  ">💻 Customize status page</h2>
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="edit-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+
+                <div id="modal_content"></div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $(".edit-page").on("click", function(){
+
+        console.log("any");
+        $.ajax({
+            url: "/admin/statuspage/" + $(this).attr("value") + "",
+            type: "GET",
+            success: function(data){
+                $("#modal_content").html(data);
+            }
+        });
+
+    });
+
+</script>
 {% endblock %}

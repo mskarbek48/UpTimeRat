@@ -42,15 +42,16 @@
 					
 					$response = $client->request('GET', $this->url);
 					$this->status_code = $response->getStatusCode();
-					$this->response_time = 0;//microtime(true) - $start;
+					$this->status_message = $response->getReasonPhrase();
+					$this->response_time = microtime(true) - $start;
 					$this->response_body = $response->getBody();
 					$this->response_headers = $response->getHeaders();
 					$this->is_reachable = true;
 				} catch (\Exception $e) {
 					$this->status_code = $e->getCode();
-					$this->response_time = 0;//microtime(true) - $start;
+					$this->response_time = microtime(true) - $start;
 					$this->response_body = $e->getMessage();
-					$this->status_message = $e->getMessage();
+					$this->status_message = "Cannot connect to host";
 					$this->response_headers = [];
 					$this->certInfo = [];
 					

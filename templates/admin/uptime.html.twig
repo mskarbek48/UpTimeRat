@@ -1,0 +1,82 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+
+    <div class="container mx-auto">
+        <h1 class="text-white text-2xl font-bold mb-5">Monitor uptime - <span class="text-slate-400">{{ monitor.name }}</span></h1>
+        <div class="p-10 rounded-lg bg-slate-700 flex gap-2 items-center mb-5">
+
+            {% if monitorPresenter.getCurrentStatus.getStatus == "DOWN" %}
+                <span class="pulse-red h-4 w-4 block me-4"></span>
+                <h2 class="text-white text-2xl font-semibold">Service is currently <span class="text-red-400">DOWN</span></h2>
+            {% elseif monitorPresenter.getCurrentStatus.getStatus == "UP" %}
+                <span class="pulse-green h-4 w-4 block me-4"></span>
+                <h2 class="text-white text-2xl font-semibold">Service is currently <span class="text-green-400">Operational</span></h2>
+            {% elseif monitorPresenter.getCurrentStatus.getStatus == "SEEMS DOWN" %}
+                <span class="pulse-orange h-4 w-4 block me-4"></span>
+                <h2 class="text-white text-2xl font-semibold">Service <span class="text-orange-400">SEEMS DOWN</span></h2>
+            {% elseif monitorPresenter.getCurrentStatus.getStatus == "UNKNOWN" %}
+                <span class="pulse-yellow h-4 w-4 block me-4"></span>
+                <h2 class="text-white text-2xl font-semibold">Service status is <span class="text-yellow-400">UNKNOWN</span></h2>
+            {% endif %}
+
+        </div>
+        <div class="mb-5">
+            <div class="relative overflow-x-auto rounded-lg bg-slate-800 ">
+            <table  class="w-full text-sm text-left text-slate-400">
+                <thead class="bg-slate-700 rounded-lg">
+                    <tr>
+                        <th  scope="col" class="text-slate-400 0 p-4 ps-6">Status</th>
+                        {% if monitor.type == 'website' %}
+                        <th  scope="col" class=" text-slate-400  p-4">Code</th>
+                        {% endif %}
+                        <th  scope="col" class=" text-slate-400  p-4">Message</th>
+                        <th  scope="col" class=" text-slate-400  p-4">Time</th>
+                        <th  scope="col" class=" text-slate-400  p-4 pe-6">Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set ps = null %}
+                    {% for status in monitor.monitorstatuses|reverse|slice(0, 30) %}
+                        {% if status.status == null or status.status != ps %}
+                        {% set ps = status.status %}
+
+                        <tr class="border-b border-slate-600 last:border-0">
+                            <td class="p-4 ps-6">
+
+                                {% if status.status == "DOWN" %}
+                                    <span class="text-red-400 font-bold">{{ status.status }}</span>
+                                {% elseif status.status == "UP" %}
+                                    <span class="text-green-400 font-bold">{{ status.status }}</span>
+                                {% elseif status.status == "SEEMS DOWN" %}
+                                    <span class="text-orange-400 font-bold">{{ status.status }}</span>
+                                {% elseif status.status == "UNKNOWN" %}
+                                    <span class="text-yellow-400 font-bold">{{ status.status }}</span>
+                                {% endif %}
+
+                            </td>
+                            {% if monitor.type == 'website' %}
+                            <td  class="p-4">{{ status.statuscode }}</td>
+                            {% endif %}
+                            <td  class="p-4">{{ status.message }}</td>
+                            <td  class="p-4">{{ status.responseTime }} ms</td>
+                            <td  class="p-4 pe-6">{{ status.date|date('Y-m-d H:i:s') }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+
+        </div>
+        <div class="grid grid-cols-2 gap-5">
+            <div class="flex p-10 bg-slate-700 rounded-lg items-center justify-center gap-2">
+                {{ monitorUptimeTable(monitor)|raw }}
+                {{ monitorStatus(monitor)|raw }}
+            </div>
+            <div class="flex p-10 bg-slate-700 rounded-lg">
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
